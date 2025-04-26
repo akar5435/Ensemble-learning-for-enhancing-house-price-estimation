@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UK House Price Predictor (TF-IDF)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: url('/images_main/images/IMG_4660.JPG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        form {
+            background: rgba(255, 255, 255, 0.85); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: auto;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .prediction {
+            color: #FFFFFF;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <h1>UK House Price Predictor</h1>
+    <form method="POST">
+        <label for="bedrooms">Bedrooms (*):</label><br>
+        <input type="number" id="bedrooms" name="bedrooms" min="0" required><br>
+        
+        <label for="bathrooms">Bathrooms (*):</label><br>
+        <input type="number" id="bathrooms" name="bathrooms" min="0" required><br>
+        
+        <label for="area">Area (sq. ft):</label><br>
+        <input type="text" id="area" name="area"><br>
+        
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50" placeholder="e.g., 2 bedroom proeprty with private garden"></textarea><br>
+        
+        <label for="location">Location:</label><br>
+        <input type="text" id="location" name="location"><br>
+        
+        <input type="submit" value="Predict Price">
+    </form>
+    
+    {% if prediction %}
+        <h2 class="prediction">{{ prediction }}</h2>
+    {% endif %}
+    
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
